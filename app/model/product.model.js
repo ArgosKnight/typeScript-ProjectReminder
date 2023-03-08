@@ -26,6 +26,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Product = void 0;
 const bson_1 = require("bson");
 const mongoose_1 = __importStar(require("mongoose"));
+const category_model_1 = require("./category.model");
 // Schema
 const ProductSchema = new mongoose_1.default.Schema({
     id: {
@@ -60,7 +61,8 @@ const ProductSchema = new mongoose_1.default.Schema({
         type: Boolean,
     },
     category: {
-        type: mongoose_1.Schema
+        type: mongoose_1.Schema,
+        ref: category_model_1.Categoria
     },
 });
 const Product = mongoose_1.default.model('Product', ProductSchema);

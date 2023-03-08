@@ -1,6 +1,6 @@
 import { ObjectId } from 'bson';
 import mongoose, { Document, Model, Schema } from 'mongoose';
-import { ICategory } from './category.model';
+import { Categoria, ICategory } from './category.model';
 
 // Interface
 export interface IProduct extends Document {
@@ -51,7 +51,8 @@ const ProductSchema: Schema = new mongoose.Schema({
     type: Boolean,
   },
   category: {
-    type: Schema
+    type: Schema,
+    ref: Categoria
   },
 });
 
