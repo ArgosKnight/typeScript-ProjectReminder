@@ -1,30 +1,29 @@
-import { ObjectId } from 'bson';
+import { ObjectId } from 'mongodb';
 import mongoose, { Document, Model, Schema } from 'mongoose';
-import { Categoria, ICategory } from './category.model';
+import { ICategory } from './category.model';
 
-// Interface
 export interface IProduct extends Document {
   id: ObjectId;
   name: string;
   brand: string;
   bardCode: string;
   description: string;
-  Keywords: string[];
-  createAt: Date;
-  updateAt: Date;
+  keywords: string[];
+  createdAt: Date;
+  updatedAt: Date;
   price: number;
   isActive: boolean;
   category: ICategory['_id'];
 }
 
-// Schema
 const ProductSchema: Schema = new mongoose.Schema({
-  id: {
+  id:{
     type: ObjectId,
-    required: true,
+    require: true
   },
   name: {
     type: String,
+    required: true
   },
   brand: {
     type: String,
@@ -35,8 +34,8 @@ const ProductSchema: Schema = new mongoose.Schema({
   description: {
     type: String,
   },
-  Keywords: {
-    type: Array,
+  keywords: {
+    type: [String],
   },
   createAt: {
     type: Date,
@@ -51,9 +50,9 @@ const ProductSchema: Schema = new mongoose.Schema({
     type: Boolean,
   },
   category: {
-    type: Schema,
-    ref: Categoria
-  },
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Categoria',
+  }
 });
 
 const Product: Model<IProduct> = mongoose.model<IProduct>('Product', ProductSchema);
