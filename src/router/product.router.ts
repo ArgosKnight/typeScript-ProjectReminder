@@ -39,6 +39,7 @@ router.get('/prom-price', async (req: Request, res: Response, next: NextFunction
   }
 });
 
+
 //mostrar por id:
 router.get('/:id', async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -49,7 +50,6 @@ router.get('/:id', async (req: Request, res: Response, next: NextFunction) => {
         next(err);
       }
 })
-
 
 
 //agregamos 
@@ -68,6 +68,7 @@ router.post('/add', async (req: Request, res: Response, next: NextFunction) => {
     }
 });
   
+
 // Editar por id
 router.put('/edit/:id', async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -86,6 +87,7 @@ router.put('/edit/:id', async (req: Request, res: Response, next: NextFunction) 
   }
 });
 
+
 //agregamos precio
 router.put('/:id/price', async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -101,6 +103,7 @@ router.put('/:id/price', async (req: Request, res: Response, next: NextFunction)
     }
 });  
 
+
 //editamos el status del producto
 router.put('/:id/status', async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -108,7 +111,8 @@ router.put('/:id/status', async (req: Request, res: Response, next: NextFunction
     const newStatus = !!req.body.isActive;
     const updatedProduct = await Product.findByIdAndUpdate(
       productId,
-      { isActive: newStatus },
+      { $set: { isActive: newStatus } },
+      { new: true }
     ).exec();
     if (!updatedProduct) {
       res.status(404).send({ message: 'Producto no encontrado.' });
@@ -134,8 +138,6 @@ router.delete('/:id', async (req: Request, res: Response, next: NextFunction) =>
     next(err);
   }
 });
-
-
 
 
 module.exports = router;

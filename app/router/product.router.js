@@ -106,7 +106,7 @@ router.put('/:id/status', (req, res, next) => __awaiter(void 0, void 0, void 0, 
     try {
         const productId = req.params.id;
         const newStatus = !!req.body.isActive;
-        const updatedProduct = yield product_model_1.Product.findByIdAndUpdate(productId, { isActive: newStatus }).exec();
+        const updatedProduct = yield product_model_1.Product.findByIdAndUpdate(productId, { $set: { isActive: newStatus } }, { new: true }).exec();
         if (!updatedProduct) {
             res.status(404).send({ message: 'Producto no encontrado.' });
             return;
