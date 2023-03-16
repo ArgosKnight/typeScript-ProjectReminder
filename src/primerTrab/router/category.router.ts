@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express';
-import { Categoria, ICategory } from '../model/category.model';
+import { ICategory, Categoria } from '../model/category.model';
 
 const router = express.Router();
 

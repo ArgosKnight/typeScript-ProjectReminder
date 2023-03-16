@@ -1,6 +1,4 @@
 import express, { Router, Request, Response, NextFunction } from 'express';
-import mongoose from 'mongoose';
-import { Categoria, ICategory } from '../model/category.model';
 import { IProduct, Product } from '../model/product.model';
 
 const router: Router = express.Router();
